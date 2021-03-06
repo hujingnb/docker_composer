@@ -1,0 +1,61 @@
+version: '3'
+services:
+  # 定义php-fpm容器
+  php-fpm-8.0:
+    image: hujingnb/php:8.0.1
+    container_name: php-fpm-8.0
+    volumes:
+      - "${USER_DIR}:${USER_DIR}"
+    restart: always
+    depends_on:
+      - mysql
+      - redis
+  php-fpm-7.4:
+    image: nanoninja/php-fpm
+    container_name: php-fpm-7.4
+    volumes:
+      - "${USER_DIR}:${USER_DIR}"
+    restart: always
+    depends_on:
+      - mysql
+      - redis
+  # 定义nginx容器
+  nginx:
+    image: nginx
+    container_name: nginx
+    depends_on:
+      - php-fpm-7.4
+      - php-fpm-8.0
+    volumes:
+      - "./config/nginx/config:/etc/nginx/conf.d"
+      - "/etc/hosts:/etc/hosts"
+      - "${USER_DIR}:${USER_DIR}"
+      - "./config/nginx/log:/var/log/nginx"
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+  mysql:
+    image: mysql
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./config/mysql/data:/var/lib/mysql"
+      - "./config/mysql/config:/etc/mysql/conf.d"
+      - "${USER_DIR}:${USER_DIR}"
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+    restart: always
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - "./config/redis/conf:/usr/local/etc/redis"
+      - "./config/redis/data:/data"
+      - "./config/redis/log:/log"
+    # 指定配置文件启动redis
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    restart: always
