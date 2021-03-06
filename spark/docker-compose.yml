@@ -1,0 +1,29 @@
+version: '3'
+services:
+  hbase:
+    image: dajobe/hbase
+    container_name: hbase
+    volumes:
+      - "./hbase:/data"
+    restart: always
+    ports:
+      - "16010:16010"
+  spark_master:
+    image: singularities/spark
+    container_name: spark_master
+    command: start-spark master
+    hostname: master
+    ports:
+      - "6066:6066"
+      - "7070:7070"
+      - "8080:8080"
+      - "50070:50070"
+  spark_worker:
+    image: singularities/spark
+    command: start-spark worker master
+    container_name: spark_worker
+    environment:
+      SPARK_WORKER_CORES: 1
+      SPARK_WORKER_MEMORY: 2g
+    links:
+      - spark_master
