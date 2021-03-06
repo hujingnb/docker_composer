@@ -19,5 +19,3 @@
 
 当然, 整个`docker-compse`是一个系统, 你可以在其中添加你需要的docker镜像, 然后再需要用到的地方使用 link.
 
-项目已弃用,  已迁移到新项目: https://gitee.com/hujingnb/docker_composer
-
