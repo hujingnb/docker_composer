@@ -11,7 +11,7 @@ services:
       - mysql
       - redis
   php-fpm-7.4:
-    image: nanoninja/php-fpm
+    image: hujingnb/php:7.4.10
     container_name: php-fpm-7.4
     volumes:
       - "${USER_DIR}:${USER_DIR}"
