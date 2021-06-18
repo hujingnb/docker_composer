@@ -9,6 +9,7 @@ services:
     volumes:
       - ./nginx/config:/etc/nginx/conf.d
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/pem:/etc/nginx/pem
       - /etc/hosts:/etc/hosts
       - ./nginx/log:/var/log/nginx
       - ./wordpress/html:/var/www/html
