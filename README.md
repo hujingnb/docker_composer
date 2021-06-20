@@ -7,3 +7,8 @@
    * nginx
    * mysql
    * redis
+2. spark: spark+hbase
+3. wordpress: 博客站点搭建
+   * nginx
+   * mysql
+   * wordpress
