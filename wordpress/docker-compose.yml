@@ -17,6 +17,9 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    # 如果需要修改 hosts 文件, 则添加
+    # extra_hosts:
+    #  - "test.com:127.0.0.1"
     restart: always
   wordpress:
     image: wordpress:beta-php8.0-fpm
