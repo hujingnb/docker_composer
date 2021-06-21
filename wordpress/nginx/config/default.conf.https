@@ -1,5 +1,10 @@
+# 配置 https 301重定向 http
 server {
     listen 80;
+    server_name hujingnb.com; # 域名修改
+    return 301 https://$server_name$request_uri;
+}
+server {
     listen 443 ssl;
     server_name hujingnb.com; # 需要将 hujingnb.com 替换成你自己的域名
 
