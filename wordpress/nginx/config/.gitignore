@@ -2,3 +2,4 @@
 !default.conf
 !default.conf.https
 !.gitignore
+!php-fpm.conf.common
